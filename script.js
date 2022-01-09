@@ -1,15 +1,13 @@
-var initialPrice = document.querySelector("#initial-price");
-var stocksQuantity = document.querySelector("#stocks-quantity");
-var currentPrice = document.querySelector("#current-price");
-var submitBtn = document.querySelector("#submit-btn");
-var outputBox = document.querySelector("#output-box");
+let initialPrice = document.querySelector("#initial-price");
+let stocksQuantity = document.querySelector("#stocks-quantity");
+let currentPrice = document.querySelector("#current-price");
+let submitBtn = document.querySelector("#submit-btn");
+let outputBox = document.querySelector("#output-box");
 
-submitBtn.addEventListener("click", submitHandler);
-
-function submitHandler() {
-  var ip = Number(initialPrice.value);
-  var qty = Number(stocksQuantity.value);
-  var curr = Number(currentPrice.value);
+let submitHandler = () => {
+  let ip = Number(initialPrice.value);
+  let qty = Number(stocksQuantity.value);
+  let curr = Number(currentPrice.value);
 
   if(initialPrice.value.length === 0) {
     outputBox.innerText = "Please enter Initial Price";
@@ -28,17 +26,19 @@ function submitHandler() {
   calculateProfitAndLoss(ip, qty, curr);
 }
 
-function calculateProfitAndLoss(initial, quantity, current) {
+let showOutput = message => outputBox.innerText = message;
+
+let calculateProfitAndLoss = (initial, quantity, current) => {
   if (initial > current) {
-    var loss = (initial - current) * quantity;
-    var lossPercentage = ((loss / (initial * quantity) * 100).toFixed(2));
+    let loss = (initial - current) * quantity;
+    let lossPercentage = ((loss / (initial * quantity) * 100).toFixed(2));
 
     showOutput(
       `Hey, the loss is ${loss} and the loss percent is ${lossPercentage}%`
     );
   } else if (current > initial) {
-    var profit = (current - initial) * quantity;
-    var profitPercentage = ((profit / (initial * quantity) * 100).toFixed(2));
+    let profit = (current - initial) * quantity;
+    let profitPercentage = ((profit / (initial * quantity) * 100).toFixed(2));
 
     showOutput(
       `Hey, the profit is ${profit} and the profit percent is ${profitPercentage}%`
@@ -48,6 +48,4 @@ function calculateProfitAndLoss(initial, quantity, current) {
   }
 }
 
-function showOutput(message) {
-  outputBox.innerText = message;
-}
+submitBtn.addEventListener("click", submitHandler);
